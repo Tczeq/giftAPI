@@ -3,7 +3,7 @@ package pl.szlify.giftapi.kid.model.command;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pl.szlify.giftapi.common.Gift;
+import pl.szlify.giftapi.gift.Gift;
 import pl.szlify.giftapi.kid.model.Kid;
 
 import java.time.LocalDateTime;

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.szlify.giftapi.kid.model.command.CreateKidCommand;
+import pl.szlify.giftapi.kid.model.command.UpdateKidCommand;
 import pl.szlify.giftapi.kid.model.dto.KidDto;
 
 import java.util.List;
@@ -32,5 +33,11 @@ public class KidController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id){
         kidService.deleteById(id);
+    }
+
+
+    @PutMapping("/{id}")
+    public KidDto updateKid(@PathVariable int id, @Valid @RequestBody UpdateKidCommand updateKidCommand) {
+        return kidService.update(id, updateKidCommand);
     }
 }

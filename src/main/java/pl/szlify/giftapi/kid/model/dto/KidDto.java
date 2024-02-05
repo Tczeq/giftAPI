@@ -1,10 +1,9 @@
 package pl.szlify.giftapi.kid.model.dto;
 
-import jakarta.persistence.Version;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import pl.szlify.giftapi.common.Gift;
+import pl.szlify.giftapi.gift.Gift;
 import pl.szlify.giftapi.kid.model.Kid;
 
 import java.time.LocalDateTime;

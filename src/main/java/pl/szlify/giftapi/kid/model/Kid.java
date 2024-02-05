@@ -3,7 +3,7 @@ package pl.szlify.giftapi.kid.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.szlify.giftapi.common.Gift;
+import pl.szlify.giftapi.gift.Gift;
 
 import java.time.LocalDateTime;
 import java.util.List;
