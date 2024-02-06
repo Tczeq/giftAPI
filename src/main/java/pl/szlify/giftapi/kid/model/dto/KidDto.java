@@ -30,6 +30,10 @@ public class KidDto {
     private boolean deleted;
 
     public static KidDto fromEntity(Kid kid) {
+
+        // dodaje to aby mozna bylo wyswietlic liste prezentow gdy:
+        // null gdy nie bedzie prezentow dodanych do dziecka albo
+        // gdy bedzie wpisane jakies entity do prezentow
         List<GiftDto> gifts = Optional.ofNullable(kid.getGifts())
                 .orElseGet(Collections::emptyList)
                 .stream()

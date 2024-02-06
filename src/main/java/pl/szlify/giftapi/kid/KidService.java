@@ -7,13 +7,15 @@ import pl.szlify.giftapi.gift.GiftRepository;
 import pl.szlify.giftapi.gift.exception.TooManyGiftsException;
 import pl.szlify.giftapi.gift.model.Gift;
 import pl.szlify.giftapi.gift.model.dto.GiftDto;
-import pl.szlify.giftapi.kid.exception.InvalidGiftNumber;
+import pl.szlify.giftapi.kid.exception.InvalidAgeException;
 import pl.szlify.giftapi.kid.exception.KidNotFoundException;
 import pl.szlify.giftapi.kid.model.Kid;
 import pl.szlify.giftapi.kid.model.command.CreateKidCommand;
 import pl.szlify.giftapi.kid.model.command.UpdateKidCommand;
 import pl.szlify.giftapi.kid.model.dto.KidDto;
 
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,16 +37,24 @@ public class KidService {
                 .orElseThrow(() -> new KidNotFoundException(id));
     }
 
+    public boolean ageUnder18(LocalDateTime dateTime) {
+        Period between = Period.between(dateTime.toLocalDate(), LocalDateTime.now().toLocalDate());
+        return between.getYears() < 18;
+    }
+
     public KidDto create(CreateKidCommand command) {
+        if(!ageUnder18(command.getBirthday())) {
+            throw new InvalidAgeException(command.getBirthday());
+        }
+        if (command.getGifts().size() >= 3) {
+            throw new TooManyGiftsException();
+        }
+
         Kid kid = command.toEntity();
-        List<Gift> gifts = new ArrayList<>();
         kidRepository.save(kid);
 
+        List<Gift> gifts = new ArrayList<>();
         if (command.getGifts() != null) {
-            if (command.getGifts().size() >= 3) {
-                throw new TooManyGiftsException();
-            }
-
             for (GiftDto element : command.getGifts()) {
                 Gift gift = new Gift();
                 gift.setName(element.getName());
@@ -68,7 +78,6 @@ public class KidService {
     public void deleteById(int id) {
         Kid kid = kidRepository.findWithLockingById(id)
                 .orElseThrow(() -> new KidNotFoundException(id));
-
         kid.setDeleted(true);
         kidRepository.save(kid);
     }
@@ -84,7 +93,7 @@ public class KidService {
         Kid kid = kidRepository.findWithLockingById(id)
                 .orElseThrow(() -> new KidNotFoundException(id));
         if (kid.getGifts().size() > 3) {
-            throw new InvalidGiftNumber();
+            throw new TooManyGiftsException();
         }
 
         List<Gift> allById = giftRepository.findAllById(updateKidCommand.getGiftsId());
