@@ -1,5 +1,6 @@
 package pl.szlify.giftapi.gift;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.szlify.giftapi.gift.model.command.CreateGiftCommand;
@@ -29,7 +30,7 @@ public class GiftController {
     }
 
     @PostMapping("/{id}")
-    public GiftDto addGiftToKidId(@PathVariable int id, @RequestBody CreateGiftCommand command) {
+    public GiftDto addGiftToKidId(@PathVariable int id, @Valid @RequestBody CreateGiftCommand command) {
         return giftService.addGiftToKidId(id, command);
     }
 
