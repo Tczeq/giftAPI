@@ -11,5 +11,5 @@ import java.util.List;
 public class UpdateKidCommand {
 
     @Size(max = 3)
-    private List<Integer> giftId;
+    private List<Integer> giftsId;
 }

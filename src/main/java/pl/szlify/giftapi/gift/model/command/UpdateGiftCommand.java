@@ -10,9 +10,6 @@ import lombok.Data;
 @Builder
 public class UpdateGiftCommand {
 
-    @Positive(message = "id cannot be negative")
-    private Integer id;
-
     @Pattern(regexp = "[A-Z][a-z]{1,50}", message = "The name must begin with a capital letter and contain from 1 to 50 letters.")
     @NotNull(message = "name is obligatory")
     private String name;

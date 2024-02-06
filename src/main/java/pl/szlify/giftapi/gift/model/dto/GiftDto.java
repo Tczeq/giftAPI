@@ -19,8 +19,6 @@ public class GiftDto {
 
     private Double price;
 
-    private Integer kidId;
-
     private boolean deleted;
 
     public static GiftDto fromEntity(Gift gift) {
@@ -28,7 +26,6 @@ public class GiftDto {
                 .id(gift.getId())
                 .name(gift.getName())
                 .price(gift.getPrice())
-                .kidId(gift.getKid() != null ? gift.getKid().getId() : null)
                 .deleted(gift.isDeleted())
                 .build();
     }

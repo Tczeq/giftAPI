@@ -18,9 +18,6 @@ public class CreateGiftCommand {
     @Positive(message = "price cannot be nagative")
     private Double price;
 
-    @Positive(message = "id cannot be negative")
-    private Integer kidId;
-
     public Gift toEntity() {
         return Gift.builder()
                 .name(name)

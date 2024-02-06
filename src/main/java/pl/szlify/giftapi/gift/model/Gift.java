@@ -2,6 +2,7 @@ package pl.szlify.giftapi.gift.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 import pl.szlify.giftapi.kid.model.Kid;
 
 @Getter
@@ -11,6 +12,7 @@ import pl.szlify.giftapi.kid.model.Kid;
 @Builder
 @Entity
 @ToString
+@Where(clause = "deleted = false")
 public class Gift {
 
     @Id

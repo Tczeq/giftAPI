@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pl.szlify.giftapi.gift.model.Gift;
+import pl.szlify.giftapi.gift.model.dto.GiftDto;
 import pl.szlify.giftapi.kid.model.Kid;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class CreateKidCommand {
 
     private LocalDateTime birthday;
 
-    private List<Integer> giftIds;
+    private List<GiftDto> gifts;
 
     public Kid toEntity() {
         return Kid.builder()

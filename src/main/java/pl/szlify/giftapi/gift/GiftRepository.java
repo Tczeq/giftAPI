@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface GiftRepository extends JpaRepository<Gift, Integer> {
 
     List<Gift> findByKidId(int id);
-//    List<Gift> findAllById(List<Integer> ids);
 
     @Query("SELECT g FROM Gift g WHERE g.id = :giftId AND g.kid.id = :kidId")
     Optional<Gift> findByIdAndKidId(int giftId, int kidId);

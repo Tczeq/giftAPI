@@ -41,21 +41,17 @@ public class GiftService {
     }
 
     @Transactional
-    public GiftDto addGiftToKidId(CreateGiftCommand command) {
+    public GiftDto addGiftToKidId(int id, CreateGiftCommand command) {
+        Kid kid = kidRepository.findWithLockingById(id)
+                .orElseThrow(() -> new KidNotFoundException(id));
+
+        if (kid.getGifts().size() >= 3) {
+            throw new TooManyGiftsException();
+        }
+
         Gift gift = command.toEntity();
-        if(command.getKidId() == null) {
-            throw new IllegalArgumentException("kidId cannot be null");
-        }
-        Kid kid = kidRepository.findWithLockingById(command.getKidId())
-                .orElseThrow(() -> new KidNotFoundException(command.getKidId()));
-
-        if(kid.getGifts().size() >= 3) {
-            throw new TooManyGiftsException("3 gifts is enough for him");
-        }
-
         gift.setKid(kid);
         kid.getGifts().add(gift);
-        giftRepository.save(gift);
 
         return GiftDto.fromEntity(giftRepository.save(gift));
     }
@@ -64,7 +60,9 @@ public class GiftService {
     public GiftDto update(int kidId, int giftId, UpdateGiftCommand command) {
         Gift gift = giftRepository.findById(giftId)
                 .orElseThrow(() -> new GiftNotFoundException(kidId));
-        if(gift.getKid().getId() != kidId) {
+
+
+        if (gift.getKid().getId() != kidId) {
             throw new GiftNotFoundException(kidId);
         }
 
@@ -77,5 +75,15 @@ public class GiftService {
         giftRepository.save(gift);
 
         return GiftDto.fromEntity(gift);
+    }
+
+
+    @Transactional
+    public void deleteGiftFromKid(int kidId, int giftId) {
+        Gift gift = giftRepository.findWithLockingById(giftId)
+                .orElseThrow(() -> new GiftNotFoundException(kidId));
+
+        gift.setDeleted(true);
+        giftRepository.save(gift);
     }
 }

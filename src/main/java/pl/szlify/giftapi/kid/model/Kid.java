@@ -3,6 +3,8 @@ package pl.szlify.giftapi.kid.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import pl.szlify.giftapi.gift.model.Gift;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ import java.util.List;
 @Builder
 @Entity
 @ToString
+@SQLDelete(sql = "UPDATE kid SET deleted = true, version = version + 1 WHERE id = ? AND version = ?")
+@Where(clause = "deleted = false")
 public class Kid {
 
     @Id
@@ -29,7 +33,6 @@ public class Kid {
     private LocalDateTime birthday;
 
     @ManyToMany
-//    @CollectionTable(name = "kid_gift", joinColumns = @JoinColumn(name = "kid_id"))
     @JoinTable(
             name = "kid_gift",
             joinColumns = @JoinColumn(name = "kid_id"),
