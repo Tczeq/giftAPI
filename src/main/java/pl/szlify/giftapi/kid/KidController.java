@@ -11,12 +11,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1/kids")
 public class KidController {
     private final KidService kidService;
 
 
     @GetMapping
-    public List<KidDto> getAll(){
+    public List<KidDto> getAll() {
         return kidService.findall();
     }
 
@@ -26,12 +27,12 @@ public class KidController {
     }
 
     @PostMapping
-    public KidDto create(@Valid @RequestBody CreateKidCommand command){
+    public KidDto create(@Valid @RequestBody CreateKidCommand command) {
         return kidService.create(command);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){
+    public void delete(@PathVariable int id) {
         kidService.deleteById(id);
     }
 

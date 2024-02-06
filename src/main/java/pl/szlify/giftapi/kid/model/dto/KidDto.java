@@ -3,11 +3,13 @@ package pl.szlify.giftapi.kid.model.dto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import pl.szlify.giftapi.gift.Gift;
+import pl.szlify.giftapi.gift.model.Gift;
 import pl.szlify.giftapi.kid.model.Kid;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
 @Getter
@@ -23,19 +25,26 @@ public class KidDto {
 
     private LocalDateTime birthday;
 
-    private List<Gift> gifts;
+    private List<Integer> giftIds;
 
     private boolean deleted;
 
 
     public static KidDto fromEntity(Kid kid) {
+        List<Integer> giftIds = Optional.ofNullable(kid.getGifts())
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(Gift::getId)
+                .toList();
+
         return KidDto.builder()
                 .id(kid.getId())
                 .firstName(kid.getFirstName())
                 .lastName(kid.getLastName())
                 .birthday(kid.getBirthday())
-                .gifts(kid.getGifts())
+                .giftIds(giftIds)
                 .deleted(kid.isDeleted())
                 .build();
     }
+
 }

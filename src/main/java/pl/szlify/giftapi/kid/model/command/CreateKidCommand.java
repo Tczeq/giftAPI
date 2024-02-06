@@ -3,7 +3,7 @@ package pl.szlify.giftapi.kid.model.command;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pl.szlify.giftapi.gift.Gift;
+import pl.szlify.giftapi.gift.model.Gift;
 import pl.szlify.giftapi.kid.model.Kid;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class CreateKidCommand {
 
     private LocalDateTime birthday;
 
-    private List<Gift> gifts;
+    private List<Integer> giftIds;
 
     public Kid toEntity() {
         return Kid.builder()

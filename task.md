@@ -16,8 +16,8 @@ API:
 ~~- update dziecka~~
 ~~- usunięcie dziecka~~
 
-- dodanie prezentu konkretnemu dziecku
-- pobranie prezentów konkretnego dziecka
-- pobranie konkretnego prezentu od konkretnego dziecka
-- update prezentu u konkretnego dziecka
+~~- dodanie prezentu konkretnemu dziecku~~
+**- pobranie prezentów konkretnego dziecka**
+~~- pobranie konkretnego prezentu od konkretnego dziecka~~
+~~- update prezentu u konkretnego dziecka~~
 - usunięcie prezentu konkretnemu dziecku
