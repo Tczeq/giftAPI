@@ -25,5 +25,5 @@ public class UpdateKidCommand {
     private LocalDateTime birthday;
 
     @Size(max = 3)
-    private List<Integer> giftsId;
+    private List<Integer> giftsIds;
 }

@@ -58,7 +58,7 @@ public class GiftService {
 
     @Transactional
     public GiftDto update(int kidId, int giftId, UpdateGiftCommand command) {
-        Gift gift = giftRepository.findById(giftId)
+        Gift gift = giftRepository.findWithLockingById(giftId)
                 .orElseThrow(() -> new GiftNotFoundException(kidId));
 
 

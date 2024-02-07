@@ -68,8 +68,7 @@ public class KidService {
                 giftRepository.saveAll(gifts);
                 kid.setGifts(gifts);
             }
-        }
-        return KidDto.fromEntity(kidRepository.save(kid));
+        }        return KidDto.fromEntity(kidRepository.save(kid));
     }
 
 
@@ -96,7 +95,7 @@ public class KidService {
             throw new TooManyGiftsException();
         }
 
-        List<Gift> allById = giftRepository.findAllById(updateKidCommand.getGiftsId());
+        List<Gift> allById = giftRepository.findAllById(updateKidCommand.getGiftsIds());
         kid.setGifts(allById);
         kidRepository.save(kid);
         return KidDto.fromEntity(kid);
