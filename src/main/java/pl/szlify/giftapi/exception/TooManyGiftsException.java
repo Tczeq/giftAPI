@@ -1,4 +1,4 @@
-package pl.szlify.giftapi.gift.exception;
+package pl.szlify.giftapi.exception;
 
 public class TooManyGiftsException extends RuntimeException {
     public TooManyGiftsException() {

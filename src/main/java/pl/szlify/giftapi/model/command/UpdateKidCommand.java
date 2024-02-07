@@ -1,4 +1,4 @@
-package pl.szlify.giftapi.kid.model.command;
+package pl.szlify.giftapi.model.command;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -24,6 +24,6 @@ public class UpdateKidCommand {
     @NotNull(message = "day of birth is obligatory")
     private LocalDateTime birthday;
 
-    @Size(max = 3)
-    private List<Integer> giftsIds;
+//    @Size(max = 3)
+//    private List<Integer> giftsIds;
 }

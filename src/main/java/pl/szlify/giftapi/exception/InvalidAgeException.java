@@ -1,4 +1,4 @@
-package pl.szlify.giftapi.kid.exception;
+package pl.szlify.giftapi.exception;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;

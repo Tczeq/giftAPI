@@ -1,10 +1,10 @@
-package pl.szlify.giftapi.gift;
+package pl.szlify.giftapi.repository;
 
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
-import pl.szlify.giftapi.gift.model.Gift;
+import pl.szlify.giftapi.model.Gift;
 
 import java.util.List;
 import java.util.Optional;

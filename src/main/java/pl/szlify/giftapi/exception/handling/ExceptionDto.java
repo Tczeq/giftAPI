@@ -1,4 +1,4 @@
-package pl.szlify.giftapi.gift.exception.handling;
+package pl.szlify.giftapi.exception.handling;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

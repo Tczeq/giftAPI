@@ -1,4 +1,4 @@
-package pl.szlify.giftapi.gift.exception.handling;
+package pl.szlify.giftapi.exception.handling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

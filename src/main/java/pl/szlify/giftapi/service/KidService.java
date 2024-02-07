@@ -1,23 +1,27 @@
-package pl.szlify.giftapi.kid;
+package pl.szlify.giftapi.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.szlify.giftapi.gift.GiftRepository;
-import pl.szlify.giftapi.gift.exception.TooManyGiftsException;
-import pl.szlify.giftapi.gift.model.Gift;
-import pl.szlify.giftapi.gift.model.dto.GiftDto;
-import pl.szlify.giftapi.kid.exception.InvalidAgeException;
-import pl.szlify.giftapi.kid.exception.KidNotFoundException;
-import pl.szlify.giftapi.kid.model.Kid;
-import pl.szlify.giftapi.kid.model.command.CreateKidCommand;
-import pl.szlify.giftapi.kid.model.command.UpdateKidCommand;
-import pl.szlify.giftapi.kid.model.dto.KidDto;
+import pl.szlify.giftapi.mapper.KidMapper;
+import pl.szlify.giftapi.repository.GiftRepository;
+import pl.szlify.giftapi.exception.TooManyGiftsException;
+import pl.szlify.giftapi.model.Gift;
+import pl.szlify.giftapi.model.dto.GiftDto;
+import pl.szlify.giftapi.repository.KidRepository;
+import pl.szlify.giftapi.exception.InvalidAgeException;
+import pl.szlify.giftapi.exception.KidNotFoundException;
+import pl.szlify.giftapi.model.Kid;
+import pl.szlify.giftapi.model.command.CreateKidCommand;
+import pl.szlify.giftapi.model.command.UpdateKidCommand;
+import pl.szlify.giftapi.model.dto.KidDto;
 
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+
+import static pl.szlify.giftapi.mapper.KidMapper.mapToDto;
 
 @Service
 @RequiredArgsConstructor
@@ -27,13 +31,13 @@ public class KidService {
 
     public List<KidDto> findall() {
         return kidRepository.findAll().stream()
-                .map(KidDto::fromEntity)
+                .map(KidMapper::mapToDto)
                 .toList();
     }
 
     public KidDto findById(int id) {
         return kidRepository.findById(id)
-                .map(KidDto::fromEntity)
+                .map(KidMapper::mapToDto)
                 .orElseThrow(() -> new KidNotFoundException(id));
     }
 
@@ -46,29 +50,30 @@ public class KidService {
         if(!ageUnder18(command.getBirthday())) {
             throw new InvalidAgeException(command.getBirthday());
         }
-        if (command.getGifts().size() >= 3) {
-            throw new TooManyGiftsException();
-        }
+//        if (command.getGifts().size() >= 3) {
+//            throw new TooManyGiftsException();
+//        }
 
-        Kid kid = command.toEntity();
+        Kid kid = KidMapper.mapFromCommand(command);
         kidRepository.save(kid);
 
-        List<Gift> gifts = new ArrayList<>();
-        if (command.getGifts() != null) {
-            for (GiftDto element : command.getGifts()) {
-                Gift gift = new Gift();
-                gift.setName(element.getName());
-                gift.setPrice(element.getPrice());
-                gift.setDeleted(element.isDeleted());
-                gift.setKid(kid);
-                gifts.add(gift);
-            }
-
-            if (!gifts.isEmpty()) {
-                giftRepository.saveAll(gifts);
-                kid.setGifts(gifts);
-            }
-        }        return KidDto.fromEntity(kidRepository.save(kid));
+//        List<Gift> gifts = new ArrayList<>();
+//        if (command.getGifts() != null) {
+//            for (GiftDto element : command.getGifts()) {
+//                Gift gift = new Gift();
+//                gift.setName(element.getName());
+//                gift.setPrice(element.getPrice());
+//                gift.setDeleted(element.isDeleted());
+//                gift.setKid(kid);
+//                gifts.add(gift);
+//            }
+//
+//            if (!gifts.isEmpty()) {
+//                giftRepository.saveAll(gifts);
+//                kid.setGifts(gifts);
+//            }
+//        }
+        return mapToDto(kidRepository.save(kid));
     }
 
 
@@ -95,10 +100,10 @@ public class KidService {
             throw new TooManyGiftsException();
         }
 
-        List<Gift> allById = giftRepository.findAllById(updateKidCommand.getGiftsIds());
-        kid.setGifts(allById);
-        kidRepository.save(kid);
-        return KidDto.fromEntity(kid);
+//        List<Gift> allById = giftRepository.findAllById(updateKidCommand.getGiftsIds());
+//        kid.setGifts(allById);
+//        kidRepository.save(kid);
+        return mapToDto(kid);
     }
 
 

@@ -1,9 +1,9 @@
-package pl.szlify.giftapi.gift.model;
+package pl.szlify.giftapi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Where;
-import pl.szlify.giftapi.kid.model.Kid;
+import pl.szlify.giftapi.model.Kid;
 
 @Getter
 @Setter

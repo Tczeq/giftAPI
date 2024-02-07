@@ -1,17 +1,18 @@
-package pl.szlify.giftapi.gift;
+package pl.szlify.giftapi.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.szlify.giftapi.gift.exception.GiftNotFoundException;
-import pl.szlify.giftapi.gift.exception.TooManyGiftsException;
-import pl.szlify.giftapi.gift.model.Gift;
-import pl.szlify.giftapi.gift.model.command.CreateGiftCommand;
-import pl.szlify.giftapi.gift.model.command.UpdateGiftCommand;
-import pl.szlify.giftapi.gift.model.dto.GiftDto;
-import pl.szlify.giftapi.kid.KidRepository;
-import pl.szlify.giftapi.kid.exception.KidNotFoundException;
-import pl.szlify.giftapi.kid.model.Kid;
+import pl.szlify.giftapi.repository.GiftRepository;
+import pl.szlify.giftapi.exception.GiftNotFoundException;
+import pl.szlify.giftapi.exception.TooManyGiftsException;
+import pl.szlify.giftapi.model.Gift;
+import pl.szlify.giftapi.model.command.CreateGiftCommand;
+import pl.szlify.giftapi.model.command.UpdateGiftCommand;
+import pl.szlify.giftapi.model.dto.GiftDto;
+import pl.szlify.giftapi.repository.KidRepository;
+import pl.szlify.giftapi.exception.KidNotFoundException;
+import pl.szlify.giftapi.model.Kid;
 
 import java.util.List;
 

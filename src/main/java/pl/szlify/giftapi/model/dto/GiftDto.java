@@ -1,11 +1,11 @@
-package pl.szlify.giftapi.gift.model.dto;
+package pl.szlify.giftapi.model.dto;
 
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import pl.szlify.giftapi.gift.model.Gift;
+import pl.szlify.giftapi.model.Gift;
 
 @Getter
 @Setter
