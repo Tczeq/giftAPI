@@ -82,7 +82,10 @@ public class KidService {
     public void deleteById(int id) {
         Kid kid = kidRepository.findWithLockingById(id)
                 .orElseThrow(() -> new KidNotFoundException(id));
+
         kid.setDeleted(true);
+
+//      TUTAJ mozna tez wyrzucic ten save??
         kidRepository.save(kid);
     }
 

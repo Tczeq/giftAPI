@@ -29,12 +29,4 @@ public class CreateKidCommand {
 
     @Size(max = 3)
     private List<GiftDto> gifts;
-
-//    public Kid toEntity() {
-//        return Kid.builder()
-//                .firstName(firstName)
-//                .lastName(lastName)
-//                .birthday(birthday)
-//                .build();
-//    }
 }
