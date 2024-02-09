@@ -1,7 +1,6 @@
 package pl.szlify.giftapi.mapper;
 
 import lombok.experimental.UtilityClass;
-import org.springframework.stereotype.Service;
 import pl.szlify.giftapi.model.Kid;
 import pl.szlify.giftapi.model.command.CreateKidCommand;
 import pl.szlify.giftapi.model.dto.KidDto;
