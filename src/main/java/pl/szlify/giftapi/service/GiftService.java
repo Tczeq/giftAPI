@@ -3,6 +3,7 @@ package pl.szlify.giftapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.szlify.giftapi.mapper.GiftMapper;
 import pl.szlify.giftapi.repository.GiftRepository;
 import pl.szlify.giftapi.exception.GiftNotFoundException;
 import pl.szlify.giftapi.exception.TooManyGiftsException;
@@ -16,6 +17,8 @@ import pl.szlify.giftapi.model.Kid;
 
 import java.util.List;
 
+import static pl.szlify.giftapi.mapper.GiftMapper.*;
+
 @Service
 @RequiredArgsConstructor
 public class GiftService {
@@ -25,19 +28,19 @@ public class GiftService {
 
     public List<GiftDto> findAll() {
         return giftRepository.findAll().stream()
-                .map(GiftDto::fromEntity)
+                .map(GiftMapper::mapToDto)
                 .toList();
     }
 
     public List<GiftDto> findByKidId(int id) {
         return giftRepository.findByKidId(id).stream()
-                .map(GiftDto::fromEntity)
+                .map(GiftMapper::mapToDto)
                 .toList();
     }
 
     public GiftDto findByIdAndByKidId(int giftId, int kidId) {
         return giftRepository.findByIdAndKidId(giftId, kidId)
-                .map(GiftDto::fromEntity)
+                .map(GiftMapper::mapToDto)
                 .orElseThrow(() -> new GiftNotFoundException(giftId));
     }
 
@@ -50,11 +53,12 @@ public class GiftService {
             throw new TooManyGiftsException();
         }
 
-        Gift gift = command.toEntity();
+        Gift gift = mapFromCommand(command);
         gift.setKid(kid);
         kid.getGifts().add(gift);
 
-        return GiftDto.fromEntity(giftRepository.save(gift));
+        return mapToDto(giftRepository.save(gift));
+//        return GiftDto.fromEntity(giftRepository.save(gift));
     }
 
     @Transactional
@@ -75,7 +79,10 @@ public class GiftService {
         }
         giftRepository.save(gift);
 
-        return GiftDto.fromEntity(gift);
+
+
+        return mapToDto(gift);
+//        return GiftDto.fromEntity(gift);
     }
 
 

@@ -19,14 +19,14 @@ public class GiftDto {
 
     private Double price;
 
-    private boolean deleted;
+//    private boolean deleted;
 
-    public static GiftDto fromEntity(Gift gift) {
-        return GiftDto.builder()
-                .id(gift.getId())
-                .name(gift.getName())
-                .price(gift.getPrice())
-                .deleted(gift.isDeleted())
-                .build();
-    }
+//    public static GiftDto fromEntity(Gift gift) {
+//        return GiftDto.builder()
+//                .id(gift.getId())
+//                .name(gift.getName())
+//                .price(gift.getPrice())
+//                .deleted(gift.isDeleted())
+//                .build();
+//    }
 }

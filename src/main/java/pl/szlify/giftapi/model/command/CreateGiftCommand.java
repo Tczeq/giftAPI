@@ -18,10 +18,10 @@ public class CreateGiftCommand {
     @Positive(message = "price cannot be nagative")
     private Double price;
 
-    public Gift toEntity() {
-        return Gift.builder()
-                .name(name)
-                .price(price)
-                .build();
-    }
+//    public Gift toEntity() {
+//        return Gift.builder()
+//                .name(name)
+//                .price(price)
+//                .build();
+//    }
 }
