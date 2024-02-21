@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import pl.szlify.giftapi.model.dto.GiftDto;
 import pl.szlify.giftapi.model.Kid;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,8 +26,5 @@ public class CreateKidCommand {
 
     @NotNull(message = "day of birth is obligatory")
     @PastOrPresent
-    private LocalDateTime birthday;
-
-    @Size(max = 3)
-    private List<GiftDto> gifts;
+    private LocalDate birthday;
 }

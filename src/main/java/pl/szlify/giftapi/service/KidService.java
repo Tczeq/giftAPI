@@ -1,6 +1,8 @@
 package pl.szlify.giftapi.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.szlify.giftapi.mapper.KidMapper;
@@ -16,6 +18,7 @@ import pl.szlify.giftapi.model.command.CreateKidCommand;
 import pl.szlify.giftapi.model.command.UpdateKidCommand;
 import pl.szlify.giftapi.model.dto.KidDto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
@@ -29,10 +32,9 @@ public class KidService {
     private final GiftRepository giftRepository;
     private final KidRepository kidRepository;
 
-    public List<KidDto> findall() {
-        return kidRepository.findAll().stream()
-                .map(KidMapper::mapToDto)
-                .toList();
+    public Page<KidDto> findall(Pageable pageable) {
+        return kidRepository.findAll(pageable)
+                .map(KidMapper::mapToDto);
     }
 
     public KidDto findById(int id) {
@@ -41,8 +43,8 @@ public class KidService {
                 .orElseThrow(() -> new KidNotFoundException(id));
     }
 
-    public boolean ageUnder18(LocalDateTime dateTime) {
-        Period between = Period.between(dateTime.toLocalDate(), LocalDateTime.now().toLocalDate());
+    public boolean ageUnder18(LocalDate date) {
+        Period between = Period.between(date, LocalDate.now());
         return between.getYears() < 18;
     }
 

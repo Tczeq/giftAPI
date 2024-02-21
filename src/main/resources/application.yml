@@ -4,3 +4,9 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+#  data:
+#    rest:
+#      default-page-size: 50
+#      max-page-size: 10000 <- max default jest 2000 a tutaj mozemy ustawic ponad ta wartosc
+# tutaj mozemu ustawic sobie parametry globalne i przekroczyc limity
+# ale nie moze byc ustawione @PageableDefault itd bo to wtedy nadpisze to co tutaj ustawimy

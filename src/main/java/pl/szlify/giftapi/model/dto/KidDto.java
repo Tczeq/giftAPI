@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import pl.szlify.giftapi.model.Kid;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,7 @@ public class KidDto {
 
     private String lastName;
 
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
 //    private List<GiftDto> gifts;
 

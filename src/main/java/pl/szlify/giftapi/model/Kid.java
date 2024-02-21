@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,16 @@ public class Kid {
 
     private String lastName;
 
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
-    @ManyToMany
-    @JoinTable(
-            name = "kid_gift",
-            joinColumns = @JoinColumn(name = "kid_id"),
-            inverseJoinColumns = @JoinColumn(name = "gift_id")
-    )
+//    @ManyToMany
+//    @JoinTable(
+//            name = "kid_gift",
+//            joinColumns = @JoinColumn(name = "kid_id"),
+//            inverseJoinColumns = @JoinColumn(name = "gift_id")
+//    )
+    //to bylo nie potrzebne
+    @OneToMany(mappedBy = "kid")
     private List<Gift> gifts = new ArrayList<>();
 
     private boolean deleted = false;

@@ -24,7 +24,6 @@ public class Gift {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "kid_id")
     private Kid kid;
 
     private boolean deleted = false;

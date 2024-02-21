@@ -8,6 +8,7 @@ import pl.szlify.giftapi.model.dto.KidDto;
 @UtilityClass
 public class KidMapper {
 
+    //todo: Mapstruct
     public static KidDto mapToDto(Kid kid) {
         return KidDto.builder()
                 .id(kid.getId())

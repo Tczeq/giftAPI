@@ -2,6 +2,9 @@ package pl.szlify.giftapi.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +32,8 @@ public class KidController {
     private final GiftService giftService;
 
     @GetMapping
-    public List<KidDto> getAll() {
-        return kidService.findall();
+    public Page<KidDto> getAll(@PageableDefault(size = 40) Pageable pageable) {
+        return kidService.findall(pageable);
     }
 
     @GetMapping("/{id}")
