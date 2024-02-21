@@ -6,10 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.szlify.giftapi.mapper.KidMapper;
+import pl.szlify.giftapi.mapper.IKidMapper;
 import pl.szlify.giftapi.repository.GiftRepository;
 import pl.szlify.giftapi.exception.TooManyGiftsException;
-import pl.szlify.giftapi.model.Gift;
-import pl.szlify.giftapi.model.dto.GiftDto;
 import pl.szlify.giftapi.repository.KidRepository;
 import pl.szlify.giftapi.exception.InvalidAgeException;
 import pl.szlify.giftapi.exception.KidNotFoundException;
@@ -19,11 +18,9 @@ import pl.szlify.giftapi.model.command.UpdateKidCommand;
 import pl.szlify.giftapi.model.dto.KidDto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
 
+import static pl.szlify.giftapi.mapper.IKidMapper.*;
 import static pl.szlify.giftapi.mapper.KidMapper.mapToDto;
 
 @Service
@@ -37,9 +34,14 @@ public class KidService {
                 .map(KidMapper::mapToDto);
     }
 
+//    public KidDto findById(int id) {
+//        return kidRepository.findById(id)
+//                .map(KidMapper::mapToDto)
+//                .orElseThrow(() -> new KidNotFoundException(id));
+//    }
     public KidDto findById(int id) {
         return kidRepository.findById(id)
-                .map(KidMapper::mapToDto)
+                .map(INSTANCE::kidToDto)
                 .orElseThrow(() -> new KidNotFoundException(id));
     }
 
@@ -52,29 +54,11 @@ public class KidService {
         if(!ageUnder18(command.getBirthday())) {
             throw new InvalidAgeException(command.getBirthday());
         }
-//        if (command.getGifts().size() >= 3) {
-//            throw new TooManyGiftsException();
-//        }
 
-        Kid kid = KidMapper.mapFromCommand(command);
+//        Kid kid = KidMapper.mapFromCommand(command);
+        Kid kid = INSTANCE.mapFromCommand(command);
         kidRepository.save(kid);
 
-//        List<Gift> gifts = new ArrayList<>();
-//        if (command.getGifts() != null) {
-//            for (GiftDto element : command.getGifts()) {
-//                Gift gift = new Gift();
-//                gift.setName(element.getName());
-//                gift.setPrice(element.getPrice());
-//                gift.setDeleted(element.isDeleted());
-//                gift.setKid(kid);
-//                gifts.add(gift);
-//            }
-//
-//            if (!gifts.isEmpty()) {
-//                giftRepository.saveAll(gifts);
-//                kid.setGifts(gifts);
-//            }
-//        }
         return mapToDto(kidRepository.save(kid));
     }
 
@@ -87,7 +71,6 @@ public class KidService {
 
         kid.setDeleted(true);
 
-//      TUTAJ mozna tez wyrzucic ten save??
         kidRepository.save(kid);
     }
 

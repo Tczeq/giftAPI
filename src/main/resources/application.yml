@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/gift
+    url: jdbc:mysql://localhost:3306/gift_api
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -10,3 +10,7 @@ spring:
 #      max-page-size: 10000 <- max default jest 2000 a tutaj mozemy ustawic ponad ta wartosc
 # tutaj mozemu ustawic sobie parametry globalne i przekroczyc limity
 # ale nie moze byc ustawione @PageableDefault itd bo to wtedy nadpisze to co tutaj ustawimy
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog-master.xml
+    drop-first: true

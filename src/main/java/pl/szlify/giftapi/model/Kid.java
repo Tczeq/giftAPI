@@ -3,6 +3,7 @@ package pl.szlify.giftapi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -15,9 +16,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
-@ToString
+@ToString(exclude = "gifts")
 @SQLDelete(sql = "UPDATE kid SET deleted = true, version = version + 1 WHERE id = ? AND version = ?")
 @Where(clause = "deleted = false")
 public class Kid {
