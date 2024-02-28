@@ -12,7 +12,16 @@
             <column name="first_name" type="varchar(30)"/>
             <column name="last_name" type="varchar(40)"/>
             <column name="birthday" type="date"/>
+            <column name="deleted" type="tinyint(1)"/>
+            <column name="version" type="integer"/>
         </createTable>
+
+<!--        <createTable tableName="boy">-->
+<!--            <column name="id" type="integer">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="pipe_length" type="double"/>-->
+<!--        </createTable>-->
     </changeSet>
 
 </databaseChangeLog>

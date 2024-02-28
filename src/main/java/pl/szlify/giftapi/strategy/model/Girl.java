@@ -1,7 +1,5 @@
 package pl.szlify.giftapi.strategy.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +14,7 @@ import pl.szlify.giftapi.model.Kid;
 @Setter
 @SuperBuilder
 @ToString(callSuper = true)
-//@Table(name = "boy")
-public class Boy extends Kid {
+public class Girl extends Kid {
 
-
-//    @Column(name = "pipe_length")
-    private double pipeLength;
+    private boolean nagging;
 }
